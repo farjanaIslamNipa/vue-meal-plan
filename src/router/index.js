@@ -10,10 +10,20 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/search-by-letter/:letter',
+      path: '/search-by-name/:name?',
+      name: 'byName',
+      component: () => import('../views/MealsByName.vue')
+    },
+    {
+      path: '/search-by-letter/:letter?',
       name: 'byLetter',
-      component: () => import('../views/MealList.vue')
-    }
+      component: () => import('../views/MealsByLetter.vue')
+    },
+    {
+      path: '/search-by-ingredients/:ingredients?',
+      name: 'byIngredients',
+      component: () => import('../views/MealsByIngredients.vue')
+    },
   ]
 })
 
