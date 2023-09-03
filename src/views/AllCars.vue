@@ -4,7 +4,14 @@
             <h2 class="text-2xl font-medium text-center mb-4">All Cars</h2>
             <div class="flex justify-center">
                 <select @click="handleFilter" v-model="selectedCar" name="" id="" class="w-2/3 mb-6 rounded-md px-2 py-3 focus:none outline-none">
-                    <option value="all">All</option>
+                    <option value="any">Any</option>
+                    <option value="htl">High to low</option>
+                    <option value="Buick">Buick</option>
+                    <option value="Porsche">Porsche</option>
+                    <option value="Audi">Audi</option>
+                </select>
+                <select @click="handleFilter" v-model="selectedPrice" name="" id="" class="w-2/3 mb-6 rounded-md px-2 py-3 focus:none outline-none">
+                    <option value="all">Any</option>
                     <option value="Chevrolet">Chevrolet</option>
                     <option value="Buick">Buick</option>
                     <option value="Porsche">Porsche</option>
