@@ -32,7 +32,17 @@ const router = createRouter({
     {
       path: '/car/:id',
       name: 'carDetails',
-      component: () => import('../views/CarDetails.vue')
+      component: () => import('../views/CarDetails.vue'),
+      children: [
+        {
+          path: 'dealer',
+          component: () => import('../views/DealerView.vue')
+        },
+        {
+          path: 'manufacturer',
+          component: () => import('../views/ManufacturerView.vue')
+        }
+      ]
     },
     {
       path: '/:pathMatch(.*)*',

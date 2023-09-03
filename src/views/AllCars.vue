@@ -1,9 +1,9 @@
 <template>
     <div class="bg-white p-10 mx-auto h-screen">
-        <div class="container bg-gray-100 p-10 rounded-xl shadow-md">
+        <div class="container mx-auto bg-gray-100 p-10 rounded-xl shadow-md">
             <h2 class="text-2xl font-medium text-center mb-4">All Cars</h2>
             <div class="flex justify-center">
-                <select v-model="selectedCar" name="" id="" class="w-2/3 mb-6 rounded-md px-2 py-3 focus:none outline-none">
+                <select @click="handleFilter" v-model="selectedCar" name="" id="" class="w-2/3 mb-6 rounded-md px-2 py-3 focus:none outline-none">
                     <option value="all">All</option>
                     <option value="Chevrolet">Chevrolet</option>
                     <option value="Buick">Buick</option>
@@ -30,26 +30,41 @@
 <script setup>
 import{ref, onMounted, watch} from'vue';
 import carsData from '../data.json'
-import {useRouter} from 'vue-router'
-
-const cars = ref([]);
-onMounted(() => cars.value = carsData)
-
-const selectedCar = ref('')
+import {useRouter, useRoute} from 'vue-router'
 
 const router = useRouter();
+const route = useRoute();
+
+const cars = ref([]);
+const selectedCar = ref('')
+const selectedPrice = ref('')
+
+onMounted(() => cars.value = carsData)
+onMounted(() => selectedCar.value = route.query.make || '')
+
 const viewCarDetails = (id) => {
     router.push('/car/' + id)
 }
 
-watch(selectedCar, () => {
+watch([selectedCar, selectedPrice], () => {
     if(selectedCar.value){
         if(selectedCar.value === 'all') cars.value = carsData;
         else{
             cars.value = carsData.filter(c => c.make === selectedCar.value)
         }
     }
+
+    if(selectedPrice.value){
+        cars.value = cars.value.sort((a, b) => {
+            if(selectedPrice.value === 'htl') return b.price - a.price 
+            else return a.price - b.price
+        })
+    }
 })
+
+const handleFilter = () => {
+    router.push({query: {make: selectedCar.value, price: selectedPrice.value}})
+}
 </script>
 
 <style scoped>
