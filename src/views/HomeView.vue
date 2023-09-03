@@ -1,6 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
-import store from '../store';
+import { onMounted, ref } from 'vue';
 import axiosClient from '../axiosClient.js'
 
 const letters = ref('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(""))
