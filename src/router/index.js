@@ -24,6 +24,24 @@ const router = createRouter({
       name: 'byIngredients',
       component: () => import('../views/MealsByIngredients.vue')
     },
+    {
+      path: '/all-cars',
+      name: 'allCars',
+      component: () => import('../views/AllCars.vue')
+    },
+    {
+      path: '/car/:id',
+      name: 'carDetails',
+      component: () => import('../views/CarDetails.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'notFound',
+      component: () => import('../views/NotFound.vue'),
+      meta: {
+        hideNavbar: true
+      }
+    }
   ]
 })
 
